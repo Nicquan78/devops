@@ -23,6 +23,14 @@ jobs:
       - name: Build Java application
         run: mvn -B clean package
 
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: semApp-jar
+          path: target/semApp.jar
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Build Docker image
         run: docker build -t devopsimage .
 
